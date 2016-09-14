@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fat: 1
+  calories: 1
+  carbs: 1
+  cholesterol: 1
+  protein: 1
+  recipe_id: 1
+
+two:
+  fat: 1
+  calories: 1
+  carbs: 1
+  cholesterol: 1
+  protein: 1
+  recipe_id: 1

@@ -1,0 +1,87 @@
+<h1>Viewing <%= @recipe.title %></h1>
+
+<% @recipe.images.each do |image| %>
+<img src="<%= image.link %>" height="300" width="300">
+<% end %>
+
+<div>Author: <%= @recipe.user.first_name %></div>
+<div>Prep time: <%= @recipe.prep_time %></div>
+<div>Average Rating: <%= @recipe.avg_rating %></div>
+
+<%= form_tag ("/recipes/#{@recipe.id}/rate", method: "post") do %>
+<div><%= number_field_tag "Rating", in: 1..6 %></div>
+<%= button_to "Rate", controller: "reviews", action: "create"  %>
+<% end %>
+
+<% if current_user %>
+  <% if @fav_check.empty? %>
+  <%= button_to "Favorite", controller: "favorites", action: "create" %>
+  <% else %>
+  <%= button_to "Unfavorite", {controller: "favorites", action: "destroy"}, method: :delete %>
+  <% end %>
+<% end %>
+
+<h2>Directions:</h2>
+<ol>
+<% @recipe.directions.each do |direction| %>
+  <li><%= direction.direction_text %></li>
+<% end %>
+</ol>
+
+<h2>Ingredients:</h2>
+<% @recipe.ingredients.split(',').each do |ingredient| %>
+<ul>
+  <li><%= ingredient %></li>
+</ul>
+<% end %>
+
+<h2>Comments:</h2>
+<% @recipe.comments.each do |comment| %>
+  <ul><li><%= comment.comment_text %> <ul>
+    <li>-<%= comment.user.first_name %></li>
+  </ul></li>
+</ul>
+  <% if current_user && comment.user_id == current_user.id %>
+    <%= button_to 'delete', {controller: "comments", action: "destroy"}, method: "delete" %>
+    <%= button_to 'edit', {controller: "comments", action: "edit"}, method: "get" %>
+  <% end %>
+<% end %>
+
+<%= form_tag "/recipes/#{@recipe.id}/comment", method: "post" do %>
+<%= text_area_tag :comment_text %>
+<div><%= button_to 'post', controller: "comments", action: "create" %></div>
+<% end %>
+
+<% if @recipe.recipe_nutrition %>
+<table border="1">
+  <tr>
+    <th>Nutrition-info</th>
+    <th>(mg/g)</th>
+  </tr>
+  <tr>
+    <td>calories</td>
+    <td><%= @recipe.recipe_nutrition.calories %></td>
+  </tr>
+  <tr>
+    <td>fat</td>
+    <td><%= @recipe.recipe_nutrition.fat.to_s << 'g' %></td>
+  </tr>
+  <tr>
+    <td>protein</td>
+    <td><%= @recipe.recipe_nutrition.protein.to_s << 'g' %></td>
+  </tr>
+  <tr>
+    <td>carbs</td>
+    <td><%= @recipe.recipe_nutrition.carbs.to_s << 'g' %></td>
+  </tr>
+  <tr>
+    <td>cholesterol</td>
+    <td><%= @recipe.recipe_nutrition.cholesterol.to_s << 'mg' %></td>
+  </tr>
+</table>
+<% end %>
+
+
+<h3><%= link_to "All Recipes", "/recipes" %></h3>
+<h3><%= link_to "Edit This Recipe", "/recipes/#{@recipe.id}/edit" %></h3>
+<h3><%= link_to "Delete", "/recipes/#{@recipe.id}", method: :delete %></h3>

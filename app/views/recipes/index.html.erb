@@ -1,0 +1,33 @@
+<h1>Welcome to my site!</h1>
+<div class="gallery">
+  <div class="container">
+    <!-- Gallery elements with pretty photo -->
+    <div class="gallery-content">
+
+      <div class="row">
+        <% @recipes.each do |recipe| %>
+          <div class="col-md-3 col-sm-4">
+            <div class="element">
+              <% if recipe.images.first %>
+                <img src="<%= recipe.images.first.link %>" class="img responsive img thumbnail" height="300" width="300"></a>
+              <% end %>
+              <div>Title: <%= recipe.title %></div>
+              <div>Author: <%= recipe.user.first_name %></div>
+              <div>Ingredients: <%= recipe.ingredients %></div>
+              <div>Prep time: <%= recipe.prep_time %></div>
+
+
+
+              <span class="gallery-img-hover"></span>
+            <!-- Gallery Image Hover Icon -->
+      
+              <%= link_to "/recipes/#{recipe.id}" do %>
+                <i class="fa fa-eye hover-icon icon-right"></i>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

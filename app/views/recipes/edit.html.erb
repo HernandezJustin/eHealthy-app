@@ -1,0 +1,12 @@
+<%= form_tag("/recipes/#{@recipe.id}", method: "patch") do %>
+  <%= label_tag(:title) %>
+  <%= text_field_tag(:title, @recipe.title) %>
+
+  <%= label_tag(:prep_time) %>
+  <%= text_field_tag(:prep_time, @recipe.prep_time) %>
+
+  <%= label_tag(:ingredients) %>
+  <%= text_field_tag(:ingredients, @recipe.ingredients) %>
+
+  <%= submit_tag("Finalize edit") %>
+<% end %>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  ingredients: MyText
+  avg_rating: 1
+  nutrition_id: 1
+  prep_time: 1
+
+two:
+  user_id: 1
+  ingredients: MyText
+  avg_rating: 1
+  nutrition_id: 1
+  prep_time: 1
