@@ -1,4 +1,4 @@
-<%= form_tag ("/recipes/#{@recipe.id}/updatecomment", method: "patch") do %>
+<%= form_tag "/recipes/#{@recipe.id}/updatecomment", method: "patch" do %>
 <%= text_area_tag :comment_text, @comment.comment_text %>
 <%= submit_tag 'Submit' %>
 <% end %>

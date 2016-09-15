@@ -18,7 +18,8 @@ class CommentsController < ApplicationController
 
   def update
     recipe = Recipe.find_by(id: params[:id])
-    @comment.update(
+    comment = Comment.find_by(recipe_id: recipe.id, user_id: current_user.id)
+    comment.update(
       user_id: current_user.id,
       comment_text: params[:comment_text],
       recipe_id: recipe.id

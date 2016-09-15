@@ -7,6 +7,7 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find_by(id: params[:id])
     if current_user
     @fav_check = @recipe.favorites.where(user_id: current_user.id)
+    @rev_check = @recipe.reviews.find_by(user_id: current_user.id, recipe_id: @recipe.id)
     end
   end
 

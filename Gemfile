@@ -14,6 +14,7 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'font-awesome-rails'
 gem 'therubyracer'
 gem 'less-rails'
+gem 'pry-rails'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 gem 'angularjs-rails'
@@ -25,6 +26,7 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'devise'
+gem 'rails_12factor', group: :production
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use ActiveModel has_secure_password

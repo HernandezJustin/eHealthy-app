@@ -8,9 +8,16 @@
 <div>Prep time: <%= @recipe.prep_time %></div>
 <div>Average Rating: <%= @recipe.avg_rating %></div>
 
-<%= form_tag ("/recipes/#{@recipe.id}/rate", method: "post") do %>
-<div><%= number_field_tag "Rating", in: 1..6 %></div>
-<%= button_to "Rate", controller: "reviews", action: "create"  %>
+<% if @rev_check %>
+  <%= form_tag "/recipes/#{@recipe.id}/rerate", method: "patch" do %>
+  <div><%= select_tag :rating, options_for_select((1..5)) %></div>
+  <%= button_to "Update Rating", controller: "reviews", action: "update"  %>
+  <% end %>
+<% else %>
+  <%= form_tag "/recipes/#{@recipe.id}/rate", method: "post" do %>
+  <div><%= select_tag :rating, options_for_select((1..5)) %></div>
+  <%= button_to "Rate", controller: "reviews", action: "create"  %>
+  <% end %>
 <% end %>
 
 <% if current_user %>
@@ -41,9 +48,13 @@
     <li>-<%= comment.user.first_name %></li>
   </ul></li>
 </ul>
+
   <% if current_user && comment.user_id == current_user.id %>
-    <%= button_to 'delete', {controller: "comments", action: "destroy"}, method: "delete" %>
-    <%= button_to 'edit', {controller: "comments", action: "edit"}, method: "get" %>
+<div class="row">
+    <%= button_to 'delete', {controller: "comments", action: "destroy"}, method: "delete", class: "col-sm-1 btn btn-danger btn-sm" %>
+    <%= button_to 'edit', {controller: "comments", action: "edit"}, method: "get", class: "col-sm-1 btn btn-primary btn-sm" %>
+  </div>
+
   <% end %>
 <% end %>
 
