@@ -11,19 +11,22 @@
 <body>
 
 <div class="header">
-  <% if current_user %>
-    <%= button_tag(:type => 'button') do %>
-      <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
-    <% end %>
-  <% else %>
-  <%= button_tag(:type => 'button') do %>
-    <%= link_to 'Sign up', new_user_registration_path %>
-  <% end %>
-  <%= button_tag(:type => 'button') do %>
-    <%= link_to 'Sign in', new_user_session_path %>
-  <% end %>
-  <% end %>
+
   <div class="container">
+    <% flash.each do |name, message| %>
+<div class="alert alert-<%= name %> alert-dismissible fade in" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <% if message.is_a?(Array) %>
+  <ul>
+    <% message.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+  <% else %>
+  <p><%= message %></p>
+  <% end %>
+</div>
+<% end %>
     <div class="row">
       <div class="col-md-10 col-sm-7">
         <!-- Navigation -->
@@ -46,7 +49,7 @@
                   <%= image_tag "nav-menu/nav1.jpg", class: "img-responsive"%> <span>Home</span>
                 <% end %></li>
                 <li><%= link_to "/profile" do %>
-                  <%= image_tag "nav-menu/nav3.jpg", class: "img-responsive" %>
+                  <%= image_tag "nav-menu/nav3.jpg", class: "img-responsive" %> <span>Profile</span>
                 <% end %></li>
                 <li class="dropdown">
                   <%= link_to "/specialrecipes", {class: "dropdown-toggle", 'data-toggle' => 'dropdown' } do %>
@@ -66,6 +69,12 @@
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
         </nav>
+        <% if current_user %>
+          <%= button_to 'Sign out', destroy_user_session_path, {method: :delete, class: 'btn btn-danger btn-lg'} %>
+        <% else %>
+          <%= button_to 'Sign up', new_user_registration_path, {method: :get, class: 'btn btn-primary btn-lg'} %>
+          <%= button_to 'Sign in', new_user_session_path, {method: :get, class: 'btn btn-primary btn-lg'} %>
+        <% end %>
       </div>
     </div>
   </div>
@@ -90,14 +99,7 @@
           <!-- Heading -->
           <h6>On-line Payment Clients</h6>
           <!-- Images -->
-          <a href="#"><img class="payment img-responsive" src="img/payment/2co.gif" alt="" /></a>
-          <a href="#"><img class="payment img-responsive" src="img/payment/authorizenet.gif" alt="" /></a>
-          <a href="#"><img class="payment img-responsive" src="img/payment/discover.gif" alt="" /></a>
-          <a href="#"><img class="payment img-responsive" src="img/payment/egold.gif" alt="" /></a>
-          <a href="#"><img class="payment img-responsive" src="img/payment/mastercard.gif" alt="" /></a>
-          <a href="#"><img class="payment img-responsive" src="img/payment/paypal.gif" alt="" /></a>
-          <a href="#"><img class="payment img-responsive" src="img/payment/visa.gif" alt="" /></a>
-          <a href="#"><img class="payment img-responsive" src="img/payment/worldpay.gif" alt="" /></a>
+
         </div> <!--/ Footer widget end -->
       </div>
       <div class="col-md-3 col-sm-6">
@@ -166,7 +168,7 @@
     <!-- Copyright -->
     <div class="footer-copyright">
       <!-- Paragraph -->
-      <p>&copy; Copyright 2014 <a href="#">Company Name</a></p>
+      <p>&copy; Copyright 2016 Justin Hernandez</p>
     </div>
   </div>
 </div>
