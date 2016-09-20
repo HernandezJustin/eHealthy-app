@@ -17,7 +17,9 @@ class Recipe < ActiveRecord::Base
     end
     if reviews.empty?
       return 'This recipe has not been reviewed yet'
-    else return @average_rating = total_rating / reviews.count
+    else
+      @average_rating = total_rating / reviews.count
+      # Recipe.update(avg_rating: @average_rating)
     end
   end
 end

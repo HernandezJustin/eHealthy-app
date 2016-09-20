@@ -8,6 +8,9 @@ class ReviewsController < ApplicationController
       rating: params[:rating]
     )
     review.save
+    recipe.update(
+      avg_rating: recipe.avg_rating
+    )
     redirect_to "/recipes"
   end
 
@@ -18,6 +21,9 @@ class ReviewsController < ApplicationController
       user_id: current_user.id,
       recipe_id: recipe.id,
       rating: params[:rating]
+    )
+    recipe.update(
+      avg_rating: recipe.avg_rating
     )
     redirect_to "/recipes"
   end

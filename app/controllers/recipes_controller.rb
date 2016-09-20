@@ -40,7 +40,8 @@ class RecipesController < ApplicationController
       user_id: current_user.id,
       title: params[:title],
       ingredients: params[:ingredients],
-      prep_time: params[:prep_time]
+      prep_time: params[:prep_time],
+      avg_rating: @recipe.avg_rating
     )
     if @recipe.save
       flash[:success] = "Recipe was successfully updated"
