@@ -11,7 +11,12 @@
 <body>
 
 <div class="header">
-
+  <% if current_user %>
+    <%= button_to 'Sign out', destroy_user_session_path, {method: :delete, class: 'btn btn-danger btn-lg'} %>
+  <% else %>
+    <%= button_to 'Sign up', new_user_registration_path, {method: :get, class: 'btn btn-primary btn-lg'} %>
+    <%= button_to 'Sign in', new_user_session_path, {method: :get, class: 'btn btn-primary btn-lg'} %>
+  <% end %>
   <div class="container">
     <% flash.each do |name, message| %>
 <div class="alert alert-<%= name %> alert-dismissible fade in" role="alert">
@@ -68,13 +73,9 @@
               </ul>
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
+
         </nav>
-        <% if current_user %>
-          <%= button_to 'Sign out', destroy_user_session_path, {method: :delete, class: 'btn btn-danger btn-lg'} %>
-        <% else %>
-          <%= button_to 'Sign up', new_user_registration_path, {method: :get, class: 'btn btn-primary btn-lg'} %>
-          <%= button_to 'Sign in', new_user_session_path, {method: :get, class: 'btn btn-primary btn-lg'} %>
-        <% end %>
+
       </div>
     </div>
   </div>

@@ -11,7 +11,7 @@ class ReviewsController < ApplicationController
     recipe.update(
       avg_rating: recipe.avg_rating
     )
-    redirect_to "/recipes"
+    redirect_to "/recipes/#{recipe.id}"
   end
 
   def update
@@ -25,6 +25,6 @@ class ReviewsController < ApplicationController
     recipe.update(
       avg_rating: recipe.avg_rating
     )
-    redirect_to "/recipes"
+    redirect_to "/recipes/#{recipe.id}"
   end
 end
