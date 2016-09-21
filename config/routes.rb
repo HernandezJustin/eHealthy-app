@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :recipes
+  patch '/recipes/:id/approve' => 'recipes#approve'
   get '/profile' => 'profile#home'
   get '/map' => 'profile#map'
   root "recipes#index"

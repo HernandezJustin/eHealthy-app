@@ -72,7 +72,7 @@
 
                         <td colspan="2">
                           <%= form_tag "/recipes/#{@recipe.id}/comment", method: "post" do %>
-                            <%= text_area_tag :comment_text %>
+                            <%= text_area_tag :comment_text, nil, cols: 31 %>
                             <div><%= button_to 'post', {controller: "comments", action: "create"}, class: "col-md-12 btn btn-primary btn-lg" %></div>
                           <% end %>
                         </td>

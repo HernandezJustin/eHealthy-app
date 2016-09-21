@@ -15,6 +15,7 @@ gem 'font-awesome-rails'
 gem 'therubyracer'
 gem 'less-rails'
 gem 'pry-rails'
+gem 'language_filter'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 gem 'angularjs-rails'

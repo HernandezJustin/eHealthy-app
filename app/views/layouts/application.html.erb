@@ -11,12 +11,6 @@
 <body>
 
 <div class="header">
-  <% if current_user %>
-    <%= button_to 'Sign out', destroy_user_session_path, {method: :delete, class: 'btn btn-danger btn-lg'} %>
-  <% else %>
-    <%= button_to 'Sign up', new_user_registration_path, {method: :get, class: 'btn btn-primary btn-lg'} %>
-    <%= button_to 'Sign in', new_user_session_path, {method: :get, class: 'btn btn-primary btn-lg'} %>
-  <% end %>
   <div class="container">
     <% flash.each do |name, message| %>
 <div class="alert alert-<%= name %> alert-dismissible fade in" role="alert">
@@ -73,11 +67,15 @@
               </ul>
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
-
         </nav>
-
       </div>
     </div>
+    <% if current_user %>
+      <%= button_to 'Sign out', destroy_user_session_path, {method: :delete, class: 'btn btn-danger btn-lg movebtnright'} %>
+    <% else %>
+      <%= button_to 'Sign up', new_user_registration_path, {method: :get, class: 'btn btn-primary btn-lg movebtnright'} %>
+      <%= button_to 'Sign in', new_user_session_path, {method: :get, class: 'btn btn-primary btn-lg movebtnright'} %>
+    <% end %>
   </div>
 </div>
 <%= yield %>
@@ -92,10 +90,10 @@
           <div class="logo">
             <img class="img-responsive" src="img/logo.png" alt="" />
             <!-- Heading -->
-            <h1>CakeFactory</h1>
+            <h1>E-Healthy</h1>
           </div>
           <!-- Paragraph -->
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et magna aliqua.</p>
+          <p>Dedicated to health conscious people who seek delicious food!</p>
           <hr />
           <!-- Heading -->
           <h6>On-line Payment Clients</h6>

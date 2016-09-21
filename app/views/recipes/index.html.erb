@@ -15,12 +15,8 @@
               <div>Author: <%= recipe.user.first_name %></div>
               <div>Ingredients: <%= recipe.ingredients %></div>
               <div>Prep time: <%= recipe.prep_time %></div>
-
-
-
               <span class="gallery-img-hover"></span>
             <!-- Gallery Image Hover Icon -->
-      
               <%= link_to "/recipes/#{recipe.id}" do %>
                 <i class="fa fa-eye hover-icon icon-right"></i>
               <% end %>

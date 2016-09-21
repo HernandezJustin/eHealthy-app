@@ -2157,6 +2157,9 @@ div.ppt { display:none !important; }
 	.inner-page .blog .sidebar-widget{ margin-top: 30px; margin-bottom: 0; }
 }
 
+.movebtnright{
+	float: right;
+}
 
 @media (max-width: 1200px){
 }

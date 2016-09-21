@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, :profanity_check
+
   def create
     recipe = Recipe.find_by(id: params[:id])
     comment = Comment.new(
@@ -45,5 +46,12 @@ class CommentsController < ApplicationController
       flash[:warning] = comment.errors.full_messages
     end
     redirect_to "/recipes/#{recipe.id}"
+  end
+
+  private
+
+  def profanity_check
+    profanity_filter = LanguageFilter::Filter.new
+    profanity_filter.sanitize(params[:comment_text])
   end
 end

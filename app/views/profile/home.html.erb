@@ -1,3 +1,13 @@
+<div class="banner padd" style="background-image: url(<%= asset_path('banner.jpg') %>)">
+	<div class="container">
+		<!-- Image -->
+		<%= image_tag 'crown-white.png', class: 'img-responsive' %>
+		<!-- <img class="img-responsive" src="img/crown-white.png" alt="" /> -->
+		<!-- Heading -->
+		<h2 class="white">My Profile</h2>
+		<div class="clearfix"></div>
+	</div>
+</div>
 
 <div class="inner-page padd">
 <h1>&nbsp; &nbsp; &nbsp; &nbsp;Hello <%= current_user.first_name %></h1>
@@ -53,14 +63,16 @@
             <% if current_user.admin? %>
   						<div class="tab-pane" id="tab4">
   							<!-- Heading -->
-  							<h5>Admin</h5>
-  							<!-- Paragraph -->
-  							<p> Duis eget risus ac orci vulputate vestibulum sit amet id orci. Etiam ac ante at lorem ultrices elementum. Vestibulum quis elit am in est urna. In vitae adipiscing enim. Curabitur rhoncus condimentum lorem, non convallis dolor faucibus eget. In ut nulla est. Sed a interdum mauris. Duis eget risus ac orci vulputate vestibulodio, id hendrerit ipsum. Fusce consequat leo vitae velit interdum at laoreet justo ullamcorper.</p>
-  							<!-- paragraph -->
-  							<p>Fusce imperdiet, risus eget viverra faucibus, diam mi vestibulum libero, ut vestibulum tellus magna nec enim. Nunc dapibus varius interdum. Phasellus at lorem ut lectus fermentum convallis. Sed diam nisi, pulvinar vitae molestie hendrerit, venenatis eget mauris. Integer porta erat ac eros porta ultrices. Proin porttitor eros a ante molestie gravida commodo dui adipiscing. <a href="#">Morbi dictum nibh gravida</a> mi pretium dapibus. Nullam in est urna..</p>
-  							<!-- Paragraph -->
-  							<p>Eet viverra faucibus, diam mi vestibulum libero, ut vestibulum tellus magna nec enim. Nunc dapibus varius interdum. Phasellus at lorem ut lectus fermentum convallis. Sed diam nisi, pulvinar vitae molestie hendrerit, venenatis eget mauris. Integer porta erat ac eros porta ultrices. Proin porttitor eros a ante molestie gravida commodo dui adipiscing. <a href="#">Morbi dictum nibh gravida</a> mi pretium dapibus. Nullam in est urna. In vitae adipiscing enim. Curabitur rhoncus condimentum lorem, non convallis dolor faucibus eget. In ut nulla est. Sed a interdum mauris. Duis eget risus ac orci vulputate vestibulum sit amet id orci. Etiam ac ante at lorem ultrices elementum. Vestibulum quis elit odio, id hendrerit ipsum. Fusce consequat leo vitae velit interdum at laoreet justo ullamcorper.</p>
-  						</div>
+  							<h4>Recipes pending approval (<%= @recipes.count %>):</h4>
+								<ul>
+									<% @recipes.each do |recipe| %>
+									<li><%= link_to recipe.title, "/recipes/#{recipe.id}" %>
+											<%= form_tag "/recipes/#{recipe.id}/approve", method: :patch do  %>
+											<%= submit_tag "approve" %>
+											<% end %>
+									</li>
+									<% end %>
+								</ul>
             <% end %>
 					</div><!--/ Tab content end -->
 				</div>
