@@ -57,7 +57,7 @@
 							<% user_sub_recipes = Recipe.where(user_id: current_user.id) %>
 							<h5>You have submitted <%= user_sub_recipes.count %> recipes:</h5><br>
 							<% user_sub_recipes.each do |recipe| %>
-							<li><%= link_to "#{recipe.title}", "/recipes/#{recipe.id}" %></li>
+							<li><%= link_to "#{recipe.title}", "/recipes/#{recipe.id}" %><% if !recipe.approved %>(pending)<% end %></li>
 							<% end %>
 						</div> <!--/ tab-pane end -->
             <% if current_user.admin? %>

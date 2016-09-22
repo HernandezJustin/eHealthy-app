@@ -6,11 +6,11 @@ class RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find_by(id: params[:id])
-    if !@recipe.approved && !current_user.admin
+    if !@recipe.approved && current_user.id == @recipe.user.id
+      flash[:info] = "Your recipe is still pending for approval"
+    elsif !@recipe.approved && !current_user.admin
       redirect_to "/recipes"
       flash[:warning] = "Sorry this recipe is pending for approval"
-    elsif !@recipe.approved && current_user.id == @recipe.user.id
-      flash[:info] = "Your recipe is still pending for approval"
     end
     if current_user
       @fav_check = @recipe.favorites.where(user_id: current_user.id)
