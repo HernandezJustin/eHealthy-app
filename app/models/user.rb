@@ -12,4 +12,5 @@ class User < ActiveRecord::Base
   has_many :recipe_nutritions, through: :user_nutritions
   has_many :user_restrictions
   has_many :diet_restrictions, through: :user_restrictions
+  validates :zipcode, length: {is: 5}, numericality: true
 end
