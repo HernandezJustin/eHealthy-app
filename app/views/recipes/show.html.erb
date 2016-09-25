@@ -1,3 +1,4 @@
+<div ng-app="app" ng-controller="ratingsCtrl" ng-init="setup(<%= @recipe.id.to_i %>)">
 <div class="inner-page padd">
   <div class="single-item">
     <div class="container">
@@ -11,6 +12,7 @@
           <div class="col-md-8 col-sm-7">
             <!-- Heading -->
             <h3><%= @recipe.title %></h3>
+
             <div class="row">
               <div class="col-md-7 col-sm-12">
                 <!-- Single item details -->
@@ -58,25 +60,14 @@
                         <td><%= @recipe.avg_rating %></td>
                       </tr>
                       <tr>
-                        <% if @rev_check %>
                         <td>
-                          <%= form_tag "/recipes/#{@recipe.id}/rerate", method: "patch" do %>
-                            <%= submit_tag "Update Rating", class: "col-md-12 btn btn-primary btn-sm" %>
-                            <td><div><%= select_tag :rating, options_for_select((1..5), @rev_check.rating) %></div></td>
-
-                          <% end %>
+                          Rate:
                         </td>
-                        <% else %>
                         <td>
-                          <%= form_tag "/recipes/#{@recipe.id}/rate", method: "post" do %>
-                            <%= submit_tag "Rate", class: "col-md-12 btn btn-primary btn-sm" %>
-                            <td><div><%= select_tag :rating, options_for_select((1..5)) %></div></td>
-                          <% end %>
+                          <i class="star-rating fa fa-lg" ng-repeat="star in recipe.stars" ng-click="rateRecipe(recipe, star, <%= @recipe.id.to_i %>)" ng-mouseover="fillStar(recipe, star)" ng-mouseleave="emptyStar(recipe, star)" ng-class="{'fa-star': star.filled, 'fa-star-o': !star.filled}" aria-hidden="true"></i>
                         </td>
-                        <% end %>
                       </tr>
                       <tr>
-
                         <td colspan="2">
                           <%= form_tag "/recipes/#{@recipe.id}/comment", method: "post" do %>
                             <%= text_area_tag :comment_text, nil, cols: 31 %>
@@ -120,7 +111,7 @@
     <% end %>
   <% end %>
 </div>
-
+</div>
 
 
 <h3><%= button_to "All Recipes", "/recipes", method: :get %>

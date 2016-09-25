@@ -1,6 +1,10 @@
-class CommentsController < ApplicationController
+class Api::V1::CommentsController < ApplicationController
   before_action :authenticate_user!, :profanity_check
 
+  def show
+    @recipe = Recipe.find_by(id: params[:id])
+    comments = Comment.where(recipe_id: params[:id])
+  end
 
   def create
     recipe = Recipe.find_by(id: params[:id])
