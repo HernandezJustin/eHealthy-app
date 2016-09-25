@@ -13,4 +13,13 @@ Rails.application.routes.draw do
   post "recipes/:id/rate" => 'reviews#create'
   patch "recipes/:id/rerate" => 'reviews#update'
   delete "recipes/:id/uncomment" => 'comments#destroy'
+
+  namespace :api do
+    namespace :v1 do
+      get '/reviews/:id' => 'reviews#show'
+      post '/reviews/:id' => 'reviews#create'
+      get '/comments/:id' => 'comments#show'
+    end
+  end
+
 end
