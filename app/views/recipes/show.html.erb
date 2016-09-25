@@ -6,7 +6,7 @@
         <div class="row">
           <div class="col-md-4 col-sm-5">
             <!-- Product image -->
-            <%= image_tag @recipe.images.first.link,  class: "img-responsive img thumbnail"  %>
+            <%= image_tag @recipe.images.first.link,  class: "img-responsive img-thumbnail", height: 430, width: 360 %>
           </div>
           <div class="col-md-8 col-sm-7">
             <!-- Heading -->
@@ -44,7 +44,14 @@
                       </tr>
                       <tr>
                         <td>Prep time:</td>
-                        <td><%= @recipe.prep_time %></td>
+                        <% hour_min_ary = @recipe.prep_time.divmod(60) %>
+                        <% if hour_min_ary[0] == 0 %>
+                        <td><%= hour_min_ary[1].to_s + " minutes" %></td>
+                        <% elsif hour_min_ary[1] == 0 %>
+                        <td><%= hour_min_ary[0].to_s + " Hour(s)"%></td>
+                        <% else %>
+                        <td><%= hour_min_ary[0].to_s + " Hour(s) and " + hour_min_ary[1].to_s + " minute(s)" %></td>
+                        <% end %>
                       </tr>
                       <tr>
                         <td>Average rating:</td>
