@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       get '/reviews/:id' => 'reviews#show'
       post '/reviews/:id' => 'reviews#create'
       get '/comments/:id' => 'comments#show'
+      post '/comment/:id' => 'comments#create'
     end
   end
 

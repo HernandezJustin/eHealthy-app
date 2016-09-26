@@ -7,18 +7,17 @@ class Api::V1::CommentsController < ApplicationController
   end
 
   def create
-    recipe = Recipe.find_by(id: params[:id])
     comment = Comment.new(
-      user_id: current_user.id,
       comment_text: params[:comment_text],
-      recipe_id: recipe.id
+      recipe_id: params[:recipe_id],
+      user_id: current_user.id
     )
     if comment.save
-      flash[:success] = "Your comment was posted!"
+      @recipe = comment.recipe
+      render 'show'
     else
-      flash[:warning] = comment.errors.full_messages
+      render json: { error: "Comment can't be blank" }, status: 422
     end
-    redirect_to "/recipes/#{recipe.id}"
   end
 
   def edit

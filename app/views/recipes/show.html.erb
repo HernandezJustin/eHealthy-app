@@ -1,4 +1,5 @@
 <div ng-app="app" ng-controller="ratingsCtrl" ng-init="setup(<%= @recipe.id.to_i %>)">
+
 <div class="inner-page padd">
   <div class="single-item">
     <div class="container">
@@ -96,20 +97,45 @@
       </div>
     </div>
   </div>
-  <h2>Comments:</h2>
-  <% @recipe.comments.each do |comment| %>
-    <ul><li><%= comment.comment_text %> <ul>
-      <li>-<%= comment.user.first_name %></li>
-    </ul></li>
-    </ul>
+  <div ng-controller="commentsCtrl" ng-init="setup(<%= @recipe.id.to_s %>)">
 
-    <% if current_user && comment.user_id == current_user.id %>
-    <div class="row">
-      <%= button_to 'delete', {controller: "comments", action: "destroy"}, method: "delete", class: "col-sm-1 btn btn-danger btn-sm" %>
-      <%= button_to 'edit', {controller: "comments", action: "edit"}, method: "get", class: "col-sm-1 btn btn-primary btn-sm" %>
+    <div class="well">
+      <h3>{{ recipe.name }}</h3>
+      <h4>By: {{ recipe.user.first_name }}</h4>
     </div>
-    <% end %>
-  <% end %>
+
+
+    <div class="row" style="margin-bottom: 20px;">
+      <div class="col-sm-6">
+        <textarea ng-model="comment" type="text" class="form-control" rows="4" placeholder="Leave a comment"></textarea>
+      </div>
+      <div class="col-sm-2">
+        <input ng-click="createComment(comment, recipe, <%= @recipe.id.to_s %>)" type="submit" class="btn btn-default" value="Submit">
+      </div>
+      <div class="alert col-sm-4" ng-class="{'alert-danger': error, 'alert-success': createdMessage}" role="alert">
+        {{ error }}
+        {{ createdMessage }}
+      </div>
+    </div>
+    <div class="list-group col-sm-6">
+      <a href="" ng-mouseover="showEdit(recipe, comment)" ng-mouseleave="removeEdit(comment)" class="list-group-item" ng-repeat="comment in recipe.comments">
+        <div ng-if="!comment.editable">
+          <!-- ng if will do a check and verify that edita -->
+          <h5>{{ comment.email }}</h5>
+          <h4>{{ comment.comment_text }}</h4>
+          <p ng-if="comment.edit" ng-click="editComment(comment)">Edit</p>
+        </div>
+        <div ng-if="comment.editable">
+          <textarea ng-model="comment.comment_text" class="form-control" name="" id="" rows="4"></textarea>
+          <input ng-click="updateComment(comment, <%= @recipe.id %>)" type="submit" class="btn btn-default" value="Submit">
+        </div>
+      </a>
+    </div>
+    <div class="alert col-sm-4" ng-class="{'alert-danger': error, 'alert-success': updatedMessage}" role="alert">
+      {{ error }}
+      {{ updatedMessage }}
+    </div>
+  </div>
 </div>
 </div>
 

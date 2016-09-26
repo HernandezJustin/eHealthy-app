@@ -1,9 +1,7 @@
-json.id @recipe.id
-json.user_id @recipe.user_id
-json.title @recipe.title
-json.ingredients @recipe.ingredients
-json.avg_rating @recipe.avg_rating
-json.nutrition_id @recipe.nutrition_id
-json.prep_time @recipe.prep_time
-json.approved @recipe.approved
-json.comments @recipe.comments.where(recipe_id: @recipe.id)
+json.partial! '/api/v1/partials/recipe', recipe: @recipe
+json.comments @recipe.comments.order(created_at: :desc).each do |comment|
+  json.comment_id comment.id
+  json.comment_text comment.comment_text
+  json.user_id comment.user_id
+  json.commenter comment.user
+end
