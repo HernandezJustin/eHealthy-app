@@ -14,6 +14,7 @@
     };
     $http.post("/api/v1/comments/"+i+".json", commentParams).success(function(response) {
       $scope.recipe = response;
+      console.log(response)
       $scope.createdMessage = response.created;
       $scope.error = null;
       $scope.comment = null;
@@ -25,9 +26,8 @@
       $scope.success = null;
       });
     };
-    $scope.showEdit = function(recipe, comment) {
-      console.log($scope.recipe.comments)
-      if ($scope.recipe.user.email === comment.commenter.email) {
+    $scope.showEdit = function(recipe, comment, ind, user_id) {
+      if ($scope.recipe.comments[ind].commenter.id === user_id) {
         comment.edit = true;
       }
     };
@@ -44,9 +44,9 @@
       var commentParams = {
         comment_text: comment.comment_text
       };
-      $http.patch("/api/v1/comments/' + "+i+" + '.json", commentParams)
+      $http.patch("/api/v1/comments/"+i+".json", commentParams)
       .success(function(response) {
-        $scope.framework = response;
+        $scope.recipe = response;
         $scope.updatedMessage = response.updated;
         $scope.error = null;
         $scope.comment = null;

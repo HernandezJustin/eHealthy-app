@@ -118,7 +118,7 @@
       </div>
     </div>
     <div class="list-group col-sm-6">
-      <a href="" ng-mouseover="showEdit(recipe, comment)" ng-mouseleave="removeEdit(comment)" class="list-group-item" ng-repeat="comment in recipe.comments">
+      <a href="" ng-mouseover="showEdit(recipe, comment, $index, <%= @current_user.id %>)" ng-mouseleave="removeEdit(comment)" class="list-group-item" ng-repeat="comment in recipe.comments" id="$index">{{$index}}
         <div ng-if="!comment.editable">
           <!-- ng if will do a check and verify that edita -->
           <h5>{{ comment.email }}</h5>
