@@ -32,6 +32,14 @@
       }
     };
 
+    $scope.deleteComment = function(recipe, comment, ind, user_id, i){
+      if ($scope.recipe.comments[ind].commenter.id === user_id) {
+        $http.delete("/api/v1/comments/"+i+".json", comment).then(function(response) {
+          $scope.recipe.comments.splice(ind, 1);
+        });
+      }
+    };
+
     $scope.removeEdit = function(comment) {
       comment.edit = false;
     };

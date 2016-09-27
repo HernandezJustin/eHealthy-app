@@ -41,14 +41,13 @@ class Api::V1::CommentsController < ApplicationController
   end
 
   def destroy
-    recipe = Recipe.find_by(id: params[:id])
-    comment = Comment.find_by(recipe_id: recipe.id, user_id: current_user.id)
+    @recipe = Recipe.find_by(id: params[:id])
+    comment = Comment.find_by(recipe_id: @recipe.id, user_id: current_user.id)
     if comment.destroy
-      flash[:info] = "Your comment was deleted!"
+      render json: { success: 'nice day'}
     else
-      flash[:warning] = comment.errors.full_messages
+      render json: { error: comment.errors.full_messages }
     end
-    redirect_to "/recipes/#{recipe.id}"
   end
 
   private

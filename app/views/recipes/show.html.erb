@@ -124,6 +124,7 @@
           <h5>{{ comment.email }}</h5>
           <h4>{{ comment.comment_text }}</h4>
           <p ng-if="comment.edit" ng-click="editComment(comment)">Edit</p>
+          <p ng-if="comment.edit" ng-click="deleteComment(recipe, comment, $index, <%= @current_user.id %>, <%= @recipe.id.to_i %>)">Delete</p>
         </div>
         <div ng-if="comment.editable">
           <textarea ng-model="comment.comment_text" class="form-control" name="" id="" rows="4"></textarea>
