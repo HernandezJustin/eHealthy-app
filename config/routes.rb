@@ -22,6 +22,9 @@ Rails.application.routes.draw do
       post '/comments/:id' => 'comments#create'
       patch '/comments/:id' => 'comments#update'
       delete '/comments/:id' => 'comments#destroy'
+      get '/favorites' => 'favorites#index'
+      get '/favorites/:id' => 'favorites#show'
+      post '/favorites/:id' => 'favorites#create'
     end
   end
 

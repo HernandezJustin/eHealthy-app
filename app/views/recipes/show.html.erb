@@ -70,14 +70,6 @@
                       </tr>
                       <tr>
                         <td colspan="2">
-                          <%= form_tag "/recipes/#{@recipe.id}/comment", method: "post" do %>
-                            <%= text_area_tag :comment_text, nil, cols: 31 %>
-                            <div><%= button_to 'post', {controller: "comments", action: "create"}, class: "col-md-12 btn btn-primary btn-lg" %></div>
-                          <% end %>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td colspan="2">
                           <% if current_user %>
                             <% if @fav_check.empty? %>
                               <%= button_to "Add to Favorites", {controller: "favorites", action: "create"}, class: "col-md-12 btn btn-danger btn-sm" %>
@@ -99,12 +91,6 @@
   </div>
   <div ng-controller="commentsCtrl" ng-init="setup(<%= @recipe.id.to_s %>)">
 
-    <div class="well">
-      <h3>{{ recipe.name }}</h3>
-      <h4>By: {{ recipe.user.first_name }}</h4>
-    </div>
-
-
     <div class="row" style="margin-bottom: 20px;">
       <div class="col-sm-6">
         <textarea ng-model="comment" type="text" class="form-control" rows="4" placeholder="Leave a comment"></textarea>
@@ -118,11 +104,11 @@
       </div>
     </div>
     <div class="list-group col-sm-6">
-      <a href="" ng-mouseover="showEdit(recipe, comment, $index, <%= @current_user.id %>)" ng-mouseleave="removeEdit(comment)" class="list-group-item" ng-repeat="comment in recipe.comments" id="$index">{{$index}}
+      <a href="" ng-mouseover="showEdit(recipe, comment, $index, <%= @current_user.id %>)" ng-mouseleave="removeEdit(comment)" class="list-group-item" ng-repeat="comment in recipe.comments" id="$index">
         <div ng-if="!comment.editable">
           <!-- ng if will do a check and verify that edita -->
-          <h5>{{ comment.email }}</h5>
-          <h4>{{ comment.comment_text }}</h4>
+
+          <h4>{{ comment.comment_text }} <li>By: {{ comment.commenter["first_name"] }}</li> </h4>
           <p ng-if="comment.edit" ng-click="editComment(comment)">Edit</p>
           <p ng-if="comment.edit" ng-click="deleteComment(recipe, comment, $index, <%= @current_user.id %>, <%= @recipe.id.to_i %>)">Delete</p>
         </div>
