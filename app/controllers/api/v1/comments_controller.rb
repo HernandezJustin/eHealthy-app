@@ -1,5 +1,6 @@
 class Api::V1::CommentsController < ApplicationController
-  before_action :authenticate_user!, :profanity_check
+  before_filter :authenticate_user!, except: [:show]
+  before_action :profanity_check
   skip_before_action :verify_authenticity_token
 
   def show

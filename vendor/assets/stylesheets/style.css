@@ -470,6 +470,11 @@ body {
 	color: #fff;
 }
 
+#commentScroll{
+	max-height: 300px;
+  overflow-y:scroll; 
+}
+
 .cart-dropdown .cart-item img {
 	max-width: 60px;
 	float: left;

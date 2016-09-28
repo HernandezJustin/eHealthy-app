@@ -6,3 +6,4 @@ json.avg_rating @recipe.avg_rating
 json.nutrition_id @recipe.nutrition_id
 json.prep_time @recipe.prep_time
 json.approved @recipe.approved
+json.favorites @recipe.favorites
