@@ -8,7 +8,9 @@
         <div class="row">
           <div class="col-md-4 col-sm-5">
             <!-- Product image -->
+            <% if @recipe.images.first %>
             <%= image_tag @recipe.images.first.link,  class: "img-responsive img-thumbnail", height: 430, width: 360 %>
+            <% end %>
           </div>
           <div class="col-md-8 col-sm-7">
             <!-- Heading -->
@@ -31,6 +33,7 @@
                     </li>
                     <% end %>
                   </ul>
+
                 </div>
               </div>
 
@@ -61,24 +64,30 @@
                         <td><%= @recipe.avg_rating %></td>
                       </tr>
                       <tr>
+                        <% if current_user %>
                         <td>
                           Rate:
                         </td>
                         <td>
                           <i class="star-rating fa fa-lg" ng-repeat="star in recipe.stars" ng-click="rateRecipe(recipe, star, <%= @recipe.id.to_i %>)" ng-mouseover="fillStar(recipe, star)" ng-mouseleave="emptyStar(recipe, star)" ng-class="{'fa-star': star.filled, 'fa-star-o': !star.filled}" aria-hidden="true"></i>
                         </td>
+                        <% end %>
                       </tr>
                       <tr>
+                        <% if current_user %>
                         <td colspan="2">
-                          <% if current_user %>
-                            <% if @fav_check.empty? %>
-                              <%= button_to "Add to Favorites", {controller: "favorites", action: "create"}, class: "col-md-12 btn btn-danger btn-sm" %>
-                            <% else %>
-                              <%= button_to "Unfavorite", {controller: "favorites", action: "destroy"}, class: "col-md-12 btn btn-danger btn-sm", method: :delete %>
-                            <% end %>
+                          <% if @fav_check.empty? %>
+                            <%= button_to "Add to Favorites", {controller: "favorites", action: "create"}, class: "col-md-12 btn btn-danger btn-sm" %>
+                          <% else %>
+                            <%= button_to "Unfavorite", {controller: "favorites", action: "destroy"}, class: "col-md-12 btn btn-danger btn-sm", method: :delete %>
                           <% end %>
                         </td>
+                        <% end %>
                       </tr>
+                      <% if !current_user %>
+                    </br>
+                     <h3>Please <a href="/users/sign_in">login</a> to access the comment, favorite, and rating features!</h3>
+                     <% end %>
                     </table>
                   <!--/ Table End-->
                 </div><!--/ Table responsive class end -->
@@ -90,7 +99,7 @@
     </div>
   </div>
   <div ng-controller="commentsCtrl" ng-init="setup(<%= @recipe.id.to_s %>)">
-
+    <% if current_user %>
     <div class="row" style="margin-bottom: 20px;">
       <div class="col-sm-6">
         <textarea ng-model="comment" type="text" class="form-control" rows="4" placeholder="Leave a comment"></textarea>
@@ -103,14 +112,15 @@
         {{ createdMessage }}
       </div>
     </div>
-    <div class="list-group col-sm-6">
-      <a href="" ng-mouseover="showEdit(recipe, comment, $index, <%= @current_user.id %>)" ng-mouseleave="removeEdit(comment)" class="list-group-item" ng-repeat="comment in recipe.comments" id="$index">
+
+    <div class="list-group col-sm-6" id="commentScroll">
+      <a href="" ng-mouseover="showEdit(recipe, comment, $index, <%= current_user.id %>)" ng-mouseleave="removeEdit(comment)" class="list-group-item" ng-repeat="comment in recipe.comments" id="$index">
         <div ng-if="!comment.editable">
           <!-- ng if will do a check and verify that edita -->
 
           <h4>{{ comment.comment_text }} <li>By: {{ comment.commenter["first_name"] }}</li> </h4>
-          <p ng-if="comment.edit" ng-click="editComment(comment)">Edit</p>
-          <p ng-if="comment.edit" ng-click="deleteComment(recipe, comment, $index, <%= @current_user.id %>, <%= @recipe.id.to_i %>)">Delete</p>
+          <div class="row"><p ng-if="comment.edit" ng-click="editComment(comment)">Edit</p>
+          <p ng-if="comment.edit" ng-click="deleteComment(recipe, comment, $index, <%= current_user.id %>, <%= @recipe.id.to_i %>)">Delete</p></div>
         </div>
         <div ng-if="comment.editable">
           <textarea ng-model="comment.comment_text" class="form-control" name="" id="" rows="4"></textarea>
@@ -118,6 +128,7 @@
         </div>
       </a>
     </div>
+    <% end %>
     <div class="alert col-sm-4" ng-class="{'alert-danger': error, 'alert-success': updatedMessage}" role="alert">
       {{ error }}
       {{ updatedMessage }}

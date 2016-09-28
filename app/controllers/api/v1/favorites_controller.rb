@@ -1,9 +1,12 @@
 class Api::V1::FavoritesController < ApplicationController
-  before_action :authenticate_user!
+  before_filter :authenticate_user!, except: [:index, :show]
   skip_before_action :verify_authenticity_token
 
   def index
     @recipes = Recipe.where(approved: true)
+    if current_user
+      @favorites = current_user.favorites
+    end
   end
 
   def show

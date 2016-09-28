@@ -1,30 +1,32 @@
 <div ng-app="app" ng-controller="favoritesCtrl" ng-init="setup()">
-<h1>Welcome to eHealthy!</h1>
-<div class="gallery">
-  <div class="container">
-    <!-- Gallery elements with pretty photo -->
-    <div class="gallery-content">
-          <div class="col-md-3 col-sm-4" ng-repeat="recipe in recipes">
-            <div class="element">
-
-                <img ng-src="{{recipe.first_img}}" class="img responsive img thumbnail" height="300" width="300">
-
+<h1 align="center">Welcome to eHealthy!</h1>
+  <div class="inner-page padd">
+    <div class="gallery">
+      <div class="container">
+        <!-- Gallery elements with pretty photo -->
+        <div class="gallery-content">
+          <div class="row">
+            <div class="col-md-3 col-sm-4" ng-repeat="recipe in recipes">
+              <div class="element">
+              <img ng-src="{{recipe.first_img}}" class="img responsive img thumbnail" height="300" width="300">
               <span><h3>{{recipe.title}}</h3></span>
               <span class="gallery-img-hover"></span>
             <!-- Gallery Image Hover Icon -->
               <%# link_to "/recipes/#{recipe.id}" do %>
-                <a href="/recipes/{{recipe.id}}">
+              <a href="/recipes/{{recipe.id}}">
                   <i class="fa fa-eye hover-icon icon-right" aria-hidden="true"></i>
-                </a>
+              </a>
               <%# end %>
               <%# link_to "/api/v1/favorites/#{recipe.id}", method: :post do %>
-                <i ng-click="favorite(recipe, recipe.id, <%= current_user.id %>)" ng-class="{'fa-heart': recipe.favorite, 'fa-heart-o': !recipe.favorite}" class="fa fa-heart hover-icon icon-left" aria-hidden="true"></i>
+              <% if current_user %>
+              <i ng-click="favorite(recipe, recipe.id, <%= current_user.id %>)" ng-class="{'fa fa-heart hover-icon icon-left': recipe.favorite, 'fa fa-heart-o hover-icon icon-left': !recipe.favorite}" aria-hidden="true"></i>
+              <% end %>
               <%# end %>
+              </div>
             </div>
           </div>
-
-
+        </div>
+      </div>
     </div>
   </div>
-</div>
 </div>

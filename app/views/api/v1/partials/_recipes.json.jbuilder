@@ -7,7 +7,6 @@ json.array! @recipes.each do |recipe|
   json.nutrition_id recipe.nutrition_id
   json.prep_time recipe.prep_time
   json.approved recipe.approved
-  json.favorites recipe.favorites
-  json.favorite recipe.favorites.include?(recipe)
+  json.favorite recipe.favorites.find_by(user_id: current_user.id, recipe_id: recipe.id) if current_user
   json.first_img recipe.images.first.link
 end
