@@ -1,12 +1,23 @@
 <div ng-app="app" ng-controller="favoritesCtrl" ng-init="setup()">
-<h1 align="center">Welcome to eHealthy!</h1>
+  <div class="banner padd" style="background-image: url(<%= asset_path('banner.jpg') %>)">
+  	<div class="container">
+  		<!-- Image -->
+  		<%= image_tag 'crown-white.png', class: 'img-responsive' %>
+  		<!-- <img class="img-responsive" src="img/crown-white.png" alt="" /> -->
+  		<!-- Heading -->
+  		<h2 class="white">Welcome to eHealthy</h2>
+  		<div class="clearfix"></div>
+  	</div>
+  </div>
   <div class="inner-page padd">
     <div class="gallery">
+    <datalist id="titles" ng-repeat="recipe in recipes">{{recipe.title}}</datalist>
+    <div align="center"><input type="text" ng-model="titleFilter" placeholder="filter by title" list="titles"></div>
       <div class="container">
         <!-- Gallery elements with pretty photo -->
         <div class="gallery-content">
           <div class="row">
-            <div class="col-md-3 col-sm-4" ng-repeat="recipe in recipes">
+            <div class="col-md-3 col-sm-4" ng-repeat="recipe in recipes | filter: {title: titleFilter}">
               <div class="element">
               <img ng-src="{{recipe.first_img}}" class="img responsive img thumbnail" height="300" width="300">
               <span><h3>{{recipe.title}}</h3></span>
