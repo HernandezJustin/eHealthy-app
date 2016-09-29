@@ -6,18 +6,22 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-50.times do |n|
-  ing_ary = []
-  3.times do
-    ing_ary << Faker::Food.spice
-  end
-  spices = ing_ary.join(',')
-  Recipe.create(
-    user_id: Faker::Number.between(2,4),
-    title: Faker::Food.ingredient,
-    ingredients: spices,
-    avg_rating: Faker::Number.between(1,5),
-    nutrition_id:(n + 6),
-    prep_time: Faker::Number.between(10,100)
-  )
-end
+# 4.times do |n|
+#   3.times do
+#     Direction.create(
+#       recipe_id: (n + 3),
+#       direction_text: Faker::Lorem.sentence(5)
+#     )
+#   end
+# end
+#
+# 4.times do |n|
+#   RecipeNutrition.create(
+#     calories: Faker::Number.between(100, 500),
+#     carbs: Faker::Number.between(5, 50),
+#     fat: Faker::Number.between(5, 50),
+#     cholesterol: Faker::Number.between(5, 75),
+#     recipe_id: (n + 3),
+#     protein: Faker::Number.between(5, 50)
+#   )
+# end

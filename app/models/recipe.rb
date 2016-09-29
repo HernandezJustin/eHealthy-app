@@ -10,6 +10,8 @@ class Recipe < ActiveRecord::Base
   has_many :diet_restrictions, through: :recipe_restrictions
   has_one :recipe_nutrition
   validates :title, uniqueness: true
+  validates :prep_time, numericality: true
+  validates :ingredients, presence: true
 
   def avg_rating
     total_rating = 0

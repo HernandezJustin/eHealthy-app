@@ -1,4 +1,5 @@
 <%= form_tag("/recipes", method: "post") do %>
+  <div>
   <%= label_tag(:title) %>
   <%= text_field_tag(:title) %>
 
@@ -7,6 +8,7 @@
 
   <%= label_tag(:ingredients) %>
   <%= text_field_tag(:ingredients) %>
+  </div>
 
   <%= submit_tag("Submit this recipe") %>
 <% end %>

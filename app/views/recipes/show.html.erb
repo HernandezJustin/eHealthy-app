@@ -1,5 +1,4 @@
 <div ng-app="app" ng-controller="ratingsCtrl" ng-init="setup(<%= @recipe.id.to_i %>)">
-
 <div class="inner-page padd">
   <div class="single-item">
     <div class="container">
@@ -15,9 +14,8 @@
           <div class="col-md-8 col-sm-7">
             <!-- Heading -->
             <h3><%= @recipe.title %></h3>
-
             <div class="row">
-              <div class="col-md-7 col-sm-12">
+              <div class="col-md-5 col-sm-12">
                 <!-- Single item details -->
                 <div class="item-details">
                   <!-- Paragraph -->
@@ -33,15 +31,32 @@
                     </li>
                     <% end %>
                   </ul>
-
                 </div>
+                <!-- <div class="col-md-5 col-sm-12"> -->
+                  <!-- Single item details -->
+                  <% if @recipe.directions %>
+                  <div class="item-details">
+                    <!-- Paragraph -->
+                    <!-- <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> -->
+                    <!-- Heading -->
+                    <h5>Directions :</h5>
+                    <!-- Recipe ingredients -->
+                    <ul class="list-unstyled">
+                      <% @recipe.directions.each_with_index do |direction, n| %>
+                      <li>
+                        <i class="fa fa-check"></i><%= n + 1 %>:<%= direction.direction_text %><span class="pull-right"></span>
+                        <div class="clearfix"></div>
+                      </li>
+                      <% end %>
+                    </ul>
+                  </div>
+                  <% end %>
+                <!-- </div> -->
               </div>
-
               <div class="col-md-5 col-sm-12">
                 <!-- Form inside table wrapper -->
                 <div class="table-responsive">
                   <!-- Ordering form -->
-
                     <!-- Table -->
                     <table class="table table-bordered">
                       <tr>
@@ -74,16 +89,14 @@
                         <% end %>
                       </tr>
                       <tr>
-                        <% if current_user %>
+                        <% if current_user && @recipe.user_id == current_user.id %>
                         <td colspan="2">
-                          <% if @fav_check.empty? %>
-                            <%= button_to "Add to Favorites", {controller: "favorites", action: "create"}, class: "col-md-12 btn btn-danger btn-sm" %>
-                          <% else %>
-                            <%= button_to "Unfavorite", {controller: "favorites", action: "destroy"}, class: "col-md-12 btn btn-danger btn-sm", method: :delete %>
-                          <% end %>
+                            <%= button_to "Edit Recipe", {controller: "recipes", action: "edit"}, class: "col-md-6 btn btn-danger btn-sm", method: :get %>
+                            <%= button_to "Delete Recipe", {controller: "recipes", action: "destroy"}, class: "col-md-6 btn btn-danger btn-sm", method: :delete %>
                         </td>
                         <% end %>
                       </tr>
+
                       <% if !current_user %>
                     </br>
                      <h3>Please <a href="/users/sign_in">login</a> to access the comment, favorite, and rating features!</h3>
@@ -91,8 +104,35 @@
                     </table>
                   <!--/ Table End-->
                 </div><!--/ Table responsive class end -->
+                <!-- <div class="col-md-5 col-sm-12"> -->
+                <% if @recipe.recipe_nutrition %>
+                <table class="table table-bordered">
+                  <tr><th colspan="2">Nutrition Facts:</th></tr>
+                  <tr>
+                    <td>calories</td>
+                    <td><%= @recipe.recipe_nutrition.calories.to_s %></td>
+                  </tr>
+                  <tr>
+                    <td>fat</td>
+                    <td><%= @recipe.recipe_nutrition.fat.to_s << 'g' %></td>
+                  </tr>
+                  <tr>
+                    <td>carbs</td>
+                    <td><%= @recipe.recipe_nutrition.carbs.to_s << 'g' %></td>
+                  </tr>
+                  <tr>
+                    <td>protein</td>
+                    <td><%= @recipe.recipe_nutrition.protein.to_s << 'g' %></td>
+                  </tr>
+                  <tr>
+                    <td>cholesterol</td>
+                    <td><%= @recipe.recipe_nutrition.cholesterol.to_s << 'mg' %></td>
+                  </tr>
+                </table>
+                <% end %>
+                <!-- </div> -->
               </div>
-            </div><!--/ Inner row end  -->
+            </div> <!--/ Inner row end  -->
           </div>
         </div>
       </div>
@@ -138,6 +178,6 @@
 </div>
 
 
-<h3><%= button_to "All Recipes", "/recipes", method: :get %>
+<!-- <h3><%= button_to "All Recipes", "/recipes", method: :get %>
 <%= button_to "Edit This Recipe", "/recipes/#{@recipe.id}/edit" %>
-<%= button_to "Delete", "/recipes/#{@recipe.id}", method: :delete %></h3>
+<%= button_to "Delete", "/recipes/#{@recipe.id}", method: :delete %></h3> -->
