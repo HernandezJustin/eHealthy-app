@@ -14,7 +14,7 @@ class Api::V1::ReviewsController < ApplicationController
     else
     Review.create(
       user_id: current_user.id,
-      recipe_id: recipe.id,
+      recipe_id: @recipe.id,
       rating: params[:rating]
     )
     end

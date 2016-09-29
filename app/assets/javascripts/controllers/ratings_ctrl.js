@@ -15,13 +15,16 @@
     //   })
     // }
     $scope.rateRecipe = function(recipe, star, i) {
-      console.log(i);
+
       var favoriteParams = {
         recipe_id: recipe.id,
         rating: star.rating
       };
+
       $http.post("/api/v1/reviews/"+i+".json", favoriteParams).success(function(response) {
-        $scope.recipe.user_rating.rating = response.user_rating.rating;
+        console.log()
+        $scope.recipe.user_rating = response.user_rating;
+
         fillStars();
       });
     };
