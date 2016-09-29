@@ -48,8 +48,20 @@ class RecipesController < ApplicationController
       title: params[:title],
       ingredients: params[:ingredients],
       prep_time: params[:prep_time],
-      avg_rating: @recipe.avg_rating
+      avg_rating: @recipe.avg_rating,
+      )
+    @recipe.recipe_nutrition.update(
+      fat: params[:fat],
+      calories: params[:calories],
+      carbs: params[:carbs],
+      cholesterol: params[:cholesterol],
+      protein: params[:protein]
     )
+    @recipe.directions.each_with_index do |direction, n|
+      direction.update(
+        direction_text: params[(:direction_text[n])]
+      )
+    end
     if @recipe.save
       flash[:success] = "Recipe was successfully updated"
     else

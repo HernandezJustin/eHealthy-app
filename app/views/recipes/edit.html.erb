@@ -1,4 +1,6 @@
 <%= form_tag("/recipes/#{@recipe.id}", method: "patch") do %>
+  <div>
+  <h3>Recipe info</h3>
   <%= label_tag(:title) %>
   <%= text_field_tag(:title, @recipe.title) %>
 
@@ -7,6 +9,30 @@
 
   <%= label_tag(:ingredients) %>
   <%= text_field_tag(:ingredients, @recipe.ingredients) %>
+  </div>
+  <div>
+  <h3>Nutritional Info:</h3>
+  <%= label_tag(:fat) %>
+  <%= text_field_tag(:fat, @recipe.recipe_nutrition.fat) %>
 
+  <%= label_tag(:calories) %>
+  <%= text_field_tag(:calories, @recipe.recipe_nutrition.calories) %>
+
+  <%= label_tag(:cholesterol) %>
+  <%= text_field_tag(:cholesterol, @recipe.recipe_nutrition.cholesterol) %>
+
+  <%= label_tag(:protein) %>
+  <%= text_field_tag(:protein, @recipe.recipe_nutrition.protein) %>
+
+  <%= label_tag(:carbs) %>
+  <%= text_field_tag(:carbs, @recipe.recipe_nutrition.carbs) %>
+  </div>
+  <div>
+  <h3>Directions:</h3>
+  <% @recipe.directions.each_with_index do |direction, n|%>
+  <%= label_tag(:direction_text[n]) %>
+  <%= text_field_tag(:direction_text[n], direction.direction_text) %>
+  <% end %>
+  </div>
   <%= submit_tag("Finalize edit") %>
 <% end %>
