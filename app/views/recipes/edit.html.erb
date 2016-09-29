@@ -10,6 +10,7 @@
   <%= label_tag(:ingredients) %>
   <%= text_field_tag(:ingredients, @recipe.ingredients) %>
   </div>
+  <% if @recipe.recipe_nutrition %>
   <div>
   <h3>Nutritional Info:</h3>
   <%= label_tag(:fat) %>
@@ -26,13 +27,16 @@
 
   <%= label_tag(:carbs) %>
   <%= text_field_tag(:carbs, @recipe.recipe_nutrition.carbs) %>
-  </div>
+</div>
+<% end %>
+<% if @recipe.directions %>
   <div>
-  <h3>Directions:</h3>
+
   <% @recipe.directions.each_with_index do |direction, n|%>
   <%= label_tag(:direction_text[n]) %>
   <%= text_field_tag(:direction_text[n], direction.direction_text) %>
   <% end %>
-  </div>
+</div>
+<% end %>
   <%= submit_tag("Finalize edit") %>
 <% end %>
