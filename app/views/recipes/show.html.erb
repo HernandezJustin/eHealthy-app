@@ -34,7 +34,7 @@
                 </div>
                 <!-- <div class="col-md-5 col-sm-12"> -->
                   <!-- Single item details -->
-                  <% if @recipe.directions %>
+                  <% if !@recipe.directions.empty? %>
                   <div class="item-details">
                     <!-- Paragraph -->
                     <!-- <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> -->
@@ -50,6 +50,7 @@
                       <% end %>
                     </ul>
                   </div>
+                  
                   <% end %>
                 <!-- </div> -->
               </div>

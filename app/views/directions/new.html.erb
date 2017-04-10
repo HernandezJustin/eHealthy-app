@@ -1,0 +1,11 @@
+<%= form_tag("/recipes/#{@recipe.id}/directions", method: "post") do %>
+
+  <div>
+  <%= dir_amt.times do |n| %>
+    <%= label_tag(n) %>
+    <%= text_field_tag(:direction_text[n]) %>
+  <% end %>
+  </div>
+
+  <%= submit_tag("Submit direction(s)") %>
+<% end %>

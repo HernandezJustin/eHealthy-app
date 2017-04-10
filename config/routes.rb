@@ -5,14 +5,10 @@ Rails.application.routes.draw do
   get '/profile' => 'profile#home'
   get '/map' => 'profile#map'
   root "recipes#index"
-  post "recipes/:id/favorite" => 'favorites#create'
-  delete "recipes/:id/unfavorite" => 'favorites#destroy'
-  post "recipes/:id/comment" => 'comments#create'
-  get "recipes/:id/fixcomment" => 'comments#edit'
-  patch "recipes/:id/updatecomment" => 'comments#update'
-  post "recipes/:id/rate" => 'reviews#create'
-  patch "recipes/:id/rerate" => 'reviews#update'
-  delete "recipes/:id/uncomment" => 'comments#destroy'
+  get '/recipes/:id/nutrition' => 'nutritions#create'
+  get '/recipes/:id/nutrition' => 'nutritions#create'
+  get '/recipes/:id/directions' => 'directions#new'
+  get '/recipes/:id/directions' => 'directions#edit'
 
   namespace :api do
     namespace :v1 do

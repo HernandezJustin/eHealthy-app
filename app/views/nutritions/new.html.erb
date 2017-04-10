@@ -1,0 +1,20 @@
+<%= form_tag("/recipes/#{@recipe.id}/nutrition", method: "post") do %>
+  <div>
+  <%= label_tag(:fat) %>
+  <%= text_field_tag(:fat) %>
+
+  <%= label_tag(:calories) %>
+  <%= text_field_tag(:calories) %>
+
+  <%= label_tag(:carbs) %>
+  <%= text_field_tag(:carbs) %>
+
+  <%= label_tag(:protein) %>
+  <%= text_field_tag(:protein) %>
+
+  <%= label_tag(:cholesterol) %>
+  <%= text_field_tag(:cholesterol) %>
+  </div>
+
+  <%= submit_tag("Submit nutritional info") %>
+<% end %>

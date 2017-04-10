@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  recipe_id: 1
-  direction_text: MyText
+  direction_text,: MyString
+  recipe_id: 
+  direction_num: 1
 
 two:
-  recipe_id: 1
-  direction_text: MyText
+  direction_text,: MyString
+  recipe_id: 
+  direction_num: 1

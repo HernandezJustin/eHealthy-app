@@ -1,0 +1,11 @@
+<%= form_tag("/recipes/#{@recipe.id}/directions", method: "patch") do %>
+
+  <div>
+    <%= :dir_amt.to_i.times do |n| %>
+      <%= label_tag(n) %>
+      <%= text_field_tag(:direction_text[n]) %>
+    <% end %>
+  </div>
+
+  <%= submit_tag("Submit nutritional info") %>
+<% end %>

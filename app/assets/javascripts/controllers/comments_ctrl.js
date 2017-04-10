@@ -26,6 +26,7 @@
       $scope.success = null;
       });
     };
+
     $scope.showEdit = function(recipe, comment, ind, user_id) {
       if ($scope.recipe.comments[ind].commenter.id === user_id) {
         comment.edit = true;
